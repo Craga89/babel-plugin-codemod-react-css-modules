@@ -59,7 +59,17 @@ codemod \
 
 For a list of valid options see [`src/index.ts:PluginOptions`](/blob/master/src/index.ts#L9)
 
+## More examples
+
 ## FAQ
+
+### It missed some classes?
+
+The plugin will attempt to convert any string literals specifically that have a value within the list of CSS class names of the imported `.css` file.
+
+It will also attempt to process strings within variables referenced in the `className` expression e.g. `className={className}` will result in the scoped `className` variable being recursively processed as outlined above.
+
+This logic is scoped to only affect statements within JSX `className` declarations, which might not pick up 100% of edge cases. In particular, it won't pick up stuff like... `className={"button--"+variant}`, since the full class name wouldn't be known until runtime. You'll need to handle this case manually
 
 ### It broke all my UI!
 
