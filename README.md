@@ -31,29 +31,29 @@ import * as styles from "./button.css";
 export default ({ children }) => <div className={styles["button"]}">{children}</div>;
 ```
 
-## Installation
-
-`codemod` needs to be installed to use this tool
-
-```js
-yarn global add codemod
-npm install -g codemod
-```
-
 ## Usage
 
-Running the following command will codemod all files in `dir/` (**Make sure they're checked into source control!**):
+Running the following command will `codemod` all files in `dir/` (**Make sure they're checked into source control!**):
 
 ```bash
-codemod -p babel-plugin-codemod-react-css-modules dir/
+npx codemod -p babel-plugin-codemod-react-css-modules dir/
 ```
 
 You can also pass options to the plugin like so
 
 ```bash
-codemod \
+npx codemod \
 	-p babel-plugin-codemod-react-css-modules \
 	-o react-css-modules='{ "importIdentifier": "css" }' \
+	path/to/file
+```
+
+Or store them in a file e.g. `options.json` and reference them using the `@` syntax:
+
+```bash
+npx codemod \
+	-p babel-plugin-codemod-react-css-modules \
+	-o react-css-modules=@options.json \
 	path/to/file
 ```
 
