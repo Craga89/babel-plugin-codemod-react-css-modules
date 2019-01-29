@@ -1,5 +1,6 @@
 {
 	"name": "babel-plugin-codemod-react-css-modules",
+	"description": "Converts React components using imported CSS stylesheets to equivalent CSS Modules syntax.",
 	"version": "0.1.0-alpha.1",
 	"main": "src/index.ts",
 	"license": "MIT",
