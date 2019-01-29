@@ -10,7 +10,8 @@ type PluginOptions = {
 	importIdentifier: "styles";
 };
 
-type State = PluginOptions & {
+type State = {
+	opts: PluginOptions;
 	classNames: Set<string>;
 };
 
@@ -24,7 +25,7 @@ const PLUGIN_DEFAULTS = {
  * CSS module lookup e.g. `style["className"]`.
  */
 const stringLiteralReplacementVisitors: Visitor<State> = {
-	StringLiteral: (path, { classNames, importIdentifier }) => {
+	StringLiteral: (path, { classNames, opts }) => {
 		// Ignore strings inside object lookups i.e. obj["className"]
 		if (path.parentPath.isMemberExpression()) {
 			return;
@@ -33,7 +34,7 @@ const stringLiteralReplacementVisitors: Visitor<State> = {
 		// Generate a new string
 		const newPath = replaceClassNamesInStringLiteral(
 			classNames,
-			importIdentifier,
+			opts.importIdentifier,
 			path.node
 		);
 
@@ -119,7 +120,7 @@ const importVisitors: Visitor<State> = {
 			t.importDeclaration(
 				[
 					t.importNamespaceSpecifier(
-						t.identifier(state.importIdentifier)
+						t.identifier(state.opts.importIdentifier)
 					)
 				],
 				node.source
@@ -135,12 +136,13 @@ const importVisitors: Visitor<State> = {
 };
 
 export default (): PluginObj<State> => ({
-	name: "css-modules",
+	name: "react-css-modules",
 	visitor: {
-		Program: (programPath, state) =>
-			programPath.traverse(
-				importVisitors,
-				defaults(state, PLUGIN_DEFAULTS)
-			)
+		Program: (programPath, state) => {
+			programPath.traverse(importVisitors, {
+				...state,
+				opts: defaults({}, state.opts, PLUGIN_DEFAULTS)
+			});
+		}
 	}
 });
