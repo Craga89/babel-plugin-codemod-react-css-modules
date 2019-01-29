@@ -7,7 +7,7 @@
 	"scripts": {
 		"test": "npm run test:postcss && npm run test:codemod",
 		"test:postcss": "node -r ts-node/register src/postcss/__tests__/shell.ts",
-		"test:codemod": "node -r ts-node/register src/__tests__/index.ts"
+		"test:codemod": "node -r ts-node/register src/__tests__/codemod.ts"
 	},
 	"keywords": [
 		"babel-plugin",
