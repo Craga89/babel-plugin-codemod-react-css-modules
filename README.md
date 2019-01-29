@@ -59,7 +59,7 @@ npx codemod \
 	path/to/file
 ```
 
-For a list of valid options see [`src/index.ts:PluginOptions`](/blob/master/src/index.ts#L9)
+For a list of valid options see [`src/index.ts:PluginOptions`](/src/index.ts#L9)
 
 ## More examples
 
