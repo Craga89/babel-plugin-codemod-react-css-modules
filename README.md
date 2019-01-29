@@ -89,4 +89,4 @@ Yes, see above.
 
 ### Can I customize the name identifier used for the CSS import?
 
-Yes, see `PluginOptions` in [`src/index.ts`](/blob/master/src/index.ts#L9)
+Yes, see `PluginOptions` in [`src/index.ts`](/src/index.ts#L9)
