@@ -1,8 +1,12 @@
 import { ImportDeclaration } from "@babel/types";
+import { extname } from "path";
+
+const VALID_EXTENSIONS = new Set(["scss", "css", "less", "postcss", "pcss"]);
 
 export const isCssImportDeclaration = (node: ImportDeclaration) => {
 	// Ignore imports of non-CSS files
-	if (!node.source.value.endsWith(".scss")) {
+	const filename = node.source.value;
+	if (!VALID_EXTENSIONS.has(extname(filename).substr(1))) {
 		return false;
 	}
 
