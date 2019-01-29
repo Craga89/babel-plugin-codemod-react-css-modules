@@ -4,8 +4,8 @@ import * as babel from "@babel/core";
 const filename = "./src/__tests__/components/button/index.tsx";
 const ts = fs.readFileSync(filename).toString();
 
-const { code } = babel.transformSync(ts, {
+const result = babel.transformSync(ts, {
 	filename
 });
 
-console.log(code);
+console.log(result!.code);
