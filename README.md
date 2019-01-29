@@ -65,13 +65,17 @@ For a list of valid options see [`src/index.ts:PluginOptions`](/src/index.ts#L9)
 
 ## FAQ
 
-### It missed some classes?
+### It missed some classes in my component?
 
 The plugin will attempt to convert any string literals specifically that have a value within the list of CSS class names of the imported `.css` file.
 
 It will also attempt to process strings within variables referenced in the `className` expression e.g. `className={className}` will result in the scoped `className` variable being recursively processed as outlined above.
 
 This logic is scoped to only affect statements within JSX `className` declarations, which might not pick up 100% of edge cases. In particular, it won't pick up stuff like... `className={"button--"+variant}`, since the full class name wouldn't be known until runtime. You'll need to handle this case manually
+
+### It missed some classes in my CSS?
+
+This plugin uses `postcss` and the `postcss-modules` plugin to get a list of valid CSS class names from the imported `.css` file. If it isn't picking up one of your classes, you might need to include a custom `postcss` plugin to handle your CSS. See below for details.
 
 ### It broke all my UI!
 
