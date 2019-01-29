@@ -26,7 +26,7 @@ It will product the following, _modified_ component:
 
 ```ts
 /* button.tsx */
-import * as styles "./button.css";
+import * as styles from "./button.css";
 
 export default ({ children }) => <div className={styles["button"]}">{children}</div>;
 ```
