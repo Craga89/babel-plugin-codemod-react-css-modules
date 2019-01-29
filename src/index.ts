@@ -49,7 +49,7 @@ const stringLiteralReplacementVisitors: Visitor<State> = {
 
 		// Otherwise just replace the literal completely
 		else {
-			path.replaceWith(newPath);
+			path.replaceWith(newPath as any);
 		}
 	}
 };
@@ -134,10 +134,10 @@ const importVisitors: Visitor<State> = {
 	}
 };
 
-export default (): PluginObj => ({
+export default (): PluginObj<State> => ({
 	name: "css-modules",
 	visitor: {
-		Program: (programPath, state: PluginOptions) =>
+		Program: (programPath, state) =>
 			programPath.traverse(
 				importVisitors,
 				defaults(state, PLUGIN_DEFAULTS)
